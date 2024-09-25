@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h2>Rock-Paper-Scissors</h2>
+        <button id="rock" onclick="getUserChoice('rock')">rock</button>
+        <button id="paper" onclick="getUserChoice('paper')">paper</button>
+        <button id="scissors" onclick="getUserChoice('scissors')">scissors</button>
+        <!-- score -->
+        <div>
+            <p>Wins:<span id="wins">0</span> - Losses:<span id="losses">0</span> - Ties:<span id="ties">0</span></p>
+            <p id="result"></p>
+            <p id="movement"></p>
+            <button onclick="reset()">reset score</button>
+        </div>
+        <script>
+            const rps = ['rock', 'paper', 'scissors']
+            let ties = document.getElementById('ties')
+            let losses = document.getElementById('losses')
+            let wins = document.getElementById('wins')
+            let movement = document.getElementById('movement')
+            let result = document.getElementById('result')
+            function computer(){
+                let index = Math.floor(Math.random() * rps.length)
+                const computer_choice = rps[index]
+                console.log(computer_choice)
+                return computer_choice
+            }
+            function getUserChoice(choice){
+                let ch = computer()
+                if (choice == ch){
+                    ties.innerHTML = Number(ties.innerHTML)+1
+                    result.innerHTML='Tie'
+                }else if (choice == 'rock' &&  ch == 'paper' || choice == 'paper' && ch == 'scissors' || choice == 'scissors' && ch == 'rock'){
+                    losses.innerHTML = Number(losses.innerHTML)+1
+                    result.innerHTML = 'You lose'
+                }else{
+                    wins.innerHTML = Number(wins.innerHTML)+1
+                    result.innerHTML = 'You win'
+                }
+                movement.innerHTML = `You ${choice} - ${ch} computer`
+            }
+            function reset(){
+                location.reload()
+
+            }
+        </script>
+    </body>
+</html>
